@@ -1,0 +1,23 @@
+Config { font = "xft:iosevka-9"
+			 , additionalFonts = ["xft:FontAwesome-9"]
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW L 100
+			 , lowerOnStart = True
+       , commands = [ Run Cpu ["-L","0","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Date "%a %b %_d %l:%M" "date" 10
+                    , Run StdinReader
+										, Run Battery 
+												["-t", "Bat: <left>% / <timeleft>"
+													, "-L", "25"
+                          , "-H", "50"
+                          , "-l", "red"
+                          , "-n", "yellow"
+                          , "-h", "green"] 60
+										, Run Wireless "wlp3s0" ["-t", "<essid> strength: <quality>"] 10
+										]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=yellow>%wlp3s0wi%</fc> | %cpu% | %memory% | %swap%"}
