@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Check if playerctl is installed
+if ! command -v playerctl &> /dev/null
+then
+    echo "playerctl could not be found. Please install it first."
+    exit 1
+fi
+
+# Get the current status of the player
+status=$(playerctl status 2>/dev/null)
+
+# Check if a player is running
+if [ -z "$status" ]; then
+    echo "No player is currently running."
+    exit 1
+fi
+
+# Get the current playing track details
+artist=$(playerctl metadata artist)
+title=$(playerctl metadata title)
+album=$(playerctl metadata album)
+# position=$(playerctl position)
+length=$(playerctl metadata mpris:length)
+
+# Convert position and length from microseconds to HH:MM:SS
+# position_formatted=$(date -d@$((position / 1000000)) -u +%H:%M:%S)
+# length_formatted=$(date -d@$((length / 1000000)) -u +%H:%M:%S)
+
+# Output the track information
+echo "\"$title\" by $artist" # from the album \"$album\""
+# echo "Position: $position_formatted / $length_formatted"
