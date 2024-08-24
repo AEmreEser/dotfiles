@@ -24,4 +24,7 @@ main = do
             , ((0, 0x1008FF02), spawn "lux -a 10%")
             , ((shiftMask, 0x1008FF02), spawn "lux -a 5%")
             , ((shiftMask, 0x1008FF03), spawn "lux -s 5%")
+            , ((mod1Mask, xK_p), spawn "playerctl play-pause")
+            , ((mod1Mask, xK_bracketleft), spawn "playerctl previous")
+            , ((mod1Mask, xK_bracketright), spawn "playerctl next")
             ]
