@@ -10,14 +10,15 @@ Config { font = "xft:iosevka-9"
                     , Run Date "%a %b %_d %l:%M" "date" 10
                     , Run StdinReader
 										, Run Battery 
-												["-t", "Bat: <left>% / <timeleft>"
+												["-t", "Bat: <left>%"
 													, "-L", "25"
                           , "-H", "50"
                           , "-l", "red"
                           , "-n", "yellow"
                           , "-h", "green"] 60
 										, Run Wireless "wlp3s0" ["-t", "<essid> strength: <quality>"] 10
+                    , Run Com "music-info" [] "musicInfo" 10
 										]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=yellow>%wlp3s0wi%</fc> | %cpu% | %memory% | %swap%"}
+       , template = "%StdinReader% | <fc=cyan>%musicInfo%</fc>}<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=grey>%wlp3s0wi%</fc> | %cpu% | %memory% | %swap%"}
