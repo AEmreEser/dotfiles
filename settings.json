@@ -1,0 +1,12 @@
+{
+    "workbench.colorTheme": "GitHub Dark Default",
+    "C_Cpp.default.compilerPath": "/usr/bin/x86_64-linux-gnu-g++",
+    "files.autoSave": "afterDelay",
+    "editor.minimap.enabled": false,
+    "update.showReleaseNotes": false,
+    "files.associations": {
+        "*.flex": "c",
+        "*.flx": "c"
+    },
+    "workbench.iconTheme": "bearded-icons"
+}
