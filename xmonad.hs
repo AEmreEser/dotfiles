@@ -7,11 +7,13 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
 main = do   
-    xmproc <- spawnPipe "xmobar"
+    xmproc <- spawnPipe "xmobar -x 0"
     spawn "xrandr --output HDMI-1 --auto --primary --output eDP-1 --auto --left-of HDMI-1 &" --dual monitor config
     spawn "xrandr --output HDMI-1-1 --auto --primary --output eDP-1-1 --auto --left-of HDMI-1-1 &" --dual monitor config
-    spawn "xloadimage -onroot -at 0,0  /home/emre/Pictures/newyork-80s.png -at 1920,0 /home/emre/Pictures/newyork-80s.png &" --set wallpaper
-    --spawn "xloadimage -onroot -at -1000,-400  /home/emre/Pictures/wallpaperflare.com_wallpaper.jpg -at 1920,0 wallpaperflare.com_wallpaper.jpg &" --set wallpaper
+
+    let wallpaper_path = "/home/emre/Pictures/SHORPY-52nd-street-1.jpg" -- SHORPY-mount-vernon-colorado.jpg"
+    spawn $ "xloadimage -onroot -at 0,-200 " ++wallpaper_path++ " -at 1920,-200 " ++wallpaper_path++ " &" --set wallpaper, note that the '$' is necessary for string concatenation
+
     xmonad $ docks def
         { layoutHook = avoidStruts  $  layoutHook def
         , logHook = dynamicLogWithPP xmobarPP
@@ -42,4 +44,6 @@ main = do
             , ((controlMask .|. mod4Mask .|. mod1Mask, xK_equal), spawn "shutdown now")
             , ((mod1Mask, xK_bracketleft), spawn "playerctl previous")
             , ((mod1Mask, xK_bracketright), spawn "playerctl next")
+            , ((mod4Mask .|. shiftMask, xK_t), spawn "setxkbmap tr")
+            , ((mod4Mask .|. shiftMask, xK_u), spawn "setxkbmap us")
             ]

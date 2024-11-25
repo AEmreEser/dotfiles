@@ -1,4 +1,5 @@
-Config { font = "xft:iosevka-9"
+-- vim: set filetype=yaml:
+  Config { font = "Terminus:style=Regular:size=10"
 			 , additionalFonts = ["xft:FontAwesome-9"]
        , bgColor = "black"
        , fgColor = "grey"
@@ -9,16 +10,32 @@ Config { font = "xft:iosevka-9"
                     , Run Swap [] 10
                     , Run Date "%a %b %_d %l:%M" "date" 10
                     , Run StdinReader
+                    , Run Volume "default" "Master" ["-t", "Vol: <volume>%"] 10
 										, Run Battery 
-												["-t", "Bat: <left>%"
+												["-t", "Bat: <acstatus>"
 													, "-L", "25"
                           , "-H", "50"
                           , "-l", "red"
                           , "-n", "yellow"
-                          , "-h", "green"] 60
+                          , "-h", "green"
+                          , "--"
+                          , "-O", "Charging <left>%"
+                          , "-o", "Discharging <left>%"
+                          , "-i", "Full"
+                          ] 60
 										, Run Wireless "wlp3s0" ["-t", "<essid> strength: <quality>"] 10
                     , Run Com "music-info" [] "musicInfo" 10
+                    , Run Com "vpn-info" [] "vpnInfo" 20
+                    , Run DynNetwork 
+                    [ "--template", "dw:<rx>kB/s"
+                        , "--Low" , "1000"
+                        , "--High", "5000"
+                        , "--low" , "darkgreen"
+                        , "--normal", "darkorange"
+                        , "--high", "darkred"
+                    ] 10
 										]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% | <fc=cyan>%musicInfo%</fc>}<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=grey>%wlp3s0wi%</fc> | %cpu% | %memory% | %swap%"}
+       , template = "%StdinReader% | <fc=cyan>%musicInfo%</fc>}<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=yellow>%default:Master%</fc> | <fc=grey>%dynnetwork%</fc> | <fc=grey>%wlp3s0wi%</fc> | %vpnInfo% | %cpu% | %memory% | %swap%"
+  }
