@@ -1,41 +1,27 @@
--- vim: set filetype=yaml:
-  Config { font = "Terminus:style=Regular:size=10"
-			 , additionalFonts = ["xft:FontAwesome-9"]
+
+Config { font = "Terminus:style=Regular:size=10"
+       , borderColor = "black"
+       , border = TopB
        , bgColor = "black"
-       , fgColor = "grey"
+       , fgColor = "white"
        , position = TopW L 100
-			 , lowerOnStart = True
-       , commands = [ Run Cpu ["-L","0","-H","50","--normal","green","--high","red"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
-                    , Run Swap [] 10
-                    , Run Date "%a %b %_d %l:%M" "date" 10
-                    , Run StdinReader
-                    , Run Volume "default" "Master" ["-t", "Vol: <volume>%"] 10
-										, Run Battery 
-												["-t", "Bat: <acstatus>"
-													, "-L", "25"
-                          , "-H", "50"
-                          , "-l", "red"
-                          , "-n", "yellow"
-                          , "-h", "green"
-                          , "--"
-                          , "-O", "Charging <left>%"
-                          , "-o", "Discharging <left>%"
-                          , "-i", "Full"
-                          ] 60
-										, Run Wireless "wlp3s0" ["-t", "<essid> strength: <quality>"] 10
-                    , Run Com "music-info" [] "musicInfo" 10
-                    , Run Com "vpn-info" [] "vpnInfo" 20
-                    , Run DynNetwork 
-                    [ "--template", "dw:<rx>kB/s"
-                        , "--Low" , "1000"
-                        , "--High", "5000"
-                        , "--low" , "darkgreen"
-                        , "--normal", "darkorange"
-                        , "--high", "darkred"
-                    ] 10
-										]
+       , allDesktops = True
+       , lowerOnStart = True
+       , overrideRedirect = True
+       , commands = [
+              Run Network "wlp3s0" ["-L","0","-H","32", "--normal","green","--high","red"] 10
+		    , Run Cpu ["-L","3","-H","50", "--normal","green","--high","red"] 10
+            , Run Memory ["-t","Mem: <usedratio>%"] 10
+            , Run Swap [] 10
+		    , Run Date "%a %b %_d %l:%M" "date" 10
+		    , Run StdinReader
+            , Run Com "music-info" [] "musicInfo" 10
+            -- , Run Wireless "wlp3s0" ["-t", "<essid> strength: <quality>"] 10
+            , Run Com "wifi.sh" [] "wifi" 60
+            , Run Volume "default" "Master" ["-t", "Vol: <volume>%"] 10
+		    , Run DynNetwork ["--template", " dw:<rx>kB/s"] 10
+		    , Run Battery ["-t", "Bat: <acstatus>", "-L", "25", "-H", "50", "-l", "red", "-n", "yellow", "-h", "green", "--", "-O", "Charging <left>%", "-o", "Discharging <left>%", "-i", "Full"] 60
+                    ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% | <fc=cyan>%musicInfo%</fc>}<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=yellow>%default:Master%</fc> | <fc=grey>%dynnetwork%</fc> | <fc=grey>%wlp3s0wi%</fc> | %vpnInfo% | %cpu% | %memory% | %swap%"
-  }
+       , template = "%StdinReader% | <fc=cyan>%musicInfo%</fc>}<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=yellow>%default:Master%</fc> | <fc=grey>%dynnetwork%</fc> | <fc=grey>%wifi%</fc> | %cpu% | %memory% | %swap%" }

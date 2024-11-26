@@ -7,7 +7,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
 main = do   
-    xmproc <- spawnPipe "xmobar -x 0"
+    xmproc <- spawnPipe "xmobar -x 1"
     spawn "xrandr --output HDMI-1 --auto --primary --output eDP-1 --auto --left-of HDMI-1 &" --dual monitor config
     spawn "xrandr --output HDMI-1-1 --auto --primary --output eDP-1-1 --auto --left-of HDMI-1-1 &" --dual monitor config
 
