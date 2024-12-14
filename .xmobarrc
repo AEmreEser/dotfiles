@@ -13,15 +13,22 @@ Config { font = "Terminus:style=Regular:size=10"
 		    , Run Cpu ["-L","3","-H","50", "--normal","green","--high","red"] 10
             , Run Memory ["-t","Mem: <usedratio>%"] 10
             , Run Swap [] 10
-		    , Run Date "%a %b %_d %l:%M" "date" 10
+		    , Run Date "%a %b %_d %H:%M" "date" 10
 		    , Run StdinReader
             , Run Com "music-info" [] "musicInfo" 10
             -- , Run Wireless "wlp3s0" ["-t", "<essid> strength: <quality>"] 10
             , Run Com "wifi.sh" [] "wifi" 60
             , Run Volume "default" "Master" ["-t", "Vol: <volume>%"] 10
 		    , Run DynNetwork ["--template", " dw:<rx>kB/s"] 10
+			, Run CoreTemp       [ "--template" , "Temp: <core0>°C|<core1>°C"
+                             , "--Low"      , "50"        -- units: °C
+                             , "--High"     , "80"        -- units: °C
+                             , "--low"      , "darkgreen"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "darkred"
+                             ] 50
 		    , Run Battery ["-t", "Bat: <acstatus>", "-L", "25", "-H", "50", "-l", "red", "-n", "yellow", "-h", "green", "--", "-O", "Charging <left>%", "-o", "Discharging <left>%", "-i", "Full"] 60
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% | <fc=cyan>%musicInfo%</fc>}<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=yellow>%default:Master%</fc> | <fc=grey>%dynnetwork%</fc> | <fc=grey>%wifi%</fc> | %cpu% | %memory% | %swap%" }
+       , template = "%StdinReader% | <fc=cyan>%musicInfo%</fc>}<fc=#ee9a00>%date%</fc> | <fc=white>%battery%</fc>{ <fc=yellow>%default:Master%</fc> | <fc=grey>%dynnetwork%</fc> | <fc=grey>%wifi%</fc> | %cpu% | %coretemp% | %memory% | %swap%" }
