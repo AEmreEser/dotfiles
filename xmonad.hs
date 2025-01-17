@@ -39,7 +39,7 @@ main = do
             , ((mod4Mask, xK_o), spawn "zen")
             , ((mod4Mask .|. controlMask, xK_3), spawn "gnome-screenshot -a")
             -- , ((mod1Mask .|. controlMask, xK_3), spawn "gnome-screenshot")
-            , ((mod4Mask, xK_p), spawn "playerctl play-pause")
+            , ((mod4Mask, xK_0), spawn "playerctl play-pause")
             , ((0, 0x1008FF14), spawn "playerctl play-pause")
             , ((0, 0x1008FF16), spawn "playerctl previous")
             , ((0, 0x1008FF17), spawn "playerctl next")
