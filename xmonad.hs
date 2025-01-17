@@ -12,15 +12,15 @@ main = do
     spawn "xrandr --output HDMI-1-1 --auto --primary --output eDP-1-1 --auto --left-of HDMI-1-1 &" --dual monitor config
 
     let wallpaper_path = "/home/emre/Pictures/" --vintage-high-quality-photos/" -- SHORPY-52nd-street-1.jpg" -- SHORPY-mount-vernon-colorado.jpg"
-    let wallpaper = "resized.jpg" -- "janet-delaney-portfolio/langton-folsom-howard-streets-1979.jpg" -- "SHORPY-mount-vernon-colorado.jpg" -- "SHORPY-52nd-street-1.jpg"
-    let adj = "-200" -- no spaces on either end!!
+    let wallpaper = "vaporwave.jpeg"-- "resized.jpg" -- "janet-delaney-portfolio/langton-folsom-howard-streets-1979.jpg" -- "SHORPY-mount-vernon-colorado.jpg" -- "SHORPY-52nd-street-1.jpg"
+    let adj = "0"-- "-200" -- no spaces on either end!!
     spawn $ "xloadimage -onroot -at 0," ++adj++" " ++wallpaper_path++wallpaper++ " -at 1920,"++adj++" " ++wallpaper_path++wallpaper++ " &" --set wallpaper, note that the '$' is necessary for string concatenation
 
     xmonad $ docks def
 		{ layoutHook = avoidStruts  $  layoutHook def
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
-                        , ppTitle = xmobarColor "green" "" . shorten 50
+                        , ppTitle = const "" -- xmobarColor "green" "" . shorten 30
 						}
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
         }  `additionalKeys`
@@ -35,8 +35,9 @@ main = do
             , ((shiftMask, 0x1008FF02), spawn "lux -a 5%")
             , ((shiftMask, 0x1008FF03), spawn "lux -s 5%")
             , ((mod4Mask, xK_n), spawn "nemo")
-            , ((mod4Mask, xK_i), spawn "cinnamon-settings")
-            , ((mod4Mask, xK_o), spawn "zen")
+            , ((mod4Mask, xK_semicolon), spawn "cinnamon-settings")
+            , ((mod4Mask, xK_i), spawn "zen")
+            , ((mod4Mask, xK_o), spawn "okular")
             , ((mod4Mask .|. controlMask, xK_3), spawn "gnome-screenshot -a")
             -- , ((mod1Mask .|. controlMask, xK_3), spawn "gnome-screenshot")
             , ((mod4Mask, xK_0), spawn "playerctl play-pause")
