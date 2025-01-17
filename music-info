@@ -29,5 +29,5 @@ length=$(playerctl metadata mpris:length)
 
 # Output the track information
 finstr="$title by $artist" # from the album \"$album\""
-echo ${finstr:0:68}
+echo ${finstr:0:72}
 # echo "Position: $position_formatted / $length_formatted"
