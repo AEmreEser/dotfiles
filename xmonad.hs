@@ -38,6 +38,7 @@ main = do
             , ((mod4Mask, xK_semicolon), spawn "cinnamon-settings")
             , ((mod4Mask, xK_i), spawn "zen")
             , ((mod4Mask, xK_o), spawn "okular")
+            , ((mod4Mask, xK_j), spawn "gnome-terminal")
             , ((mod4Mask .|. controlMask, xK_3), spawn "gnome-screenshot -a")
             -- , ((mod1Mask .|. controlMask, xK_3), spawn "gnome-screenshot")
             , ((mod4Mask, xK_0), spawn "playerctl play-pause")
