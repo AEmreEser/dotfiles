@@ -12,8 +12,8 @@ status=$(playerctl status 2>/dev/null)
 
 # Check if a player is running
 if [ -z "$status" ]; then
-    echo "No player is currently running."
-    exit 1
+    echo "No player is currently running"
+    exit 0
 fi
 
 # Get the current playing track details
@@ -29,5 +29,5 @@ length=$(playerctl metadata mpris:length)
 
 # Output the track information
 finstr="$title by $artist" # from the album \"$album\""
-echo ${finstr:0:72}
+echo ${finstr:0:82}
 # echo "Position: $position_formatted / $length_formatted"
