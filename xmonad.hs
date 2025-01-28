@@ -17,7 +17,7 @@ main = do
     spawn $ "xloadimage -onroot -at 0," ++adj++" " ++wallpaper_path++wallpaper++ " -at 1920,"++adj++" " ++wallpaper_path++wallpaper++ " &" --set wallpaper, note that the '$' is necessary for string concatenation
 
     xmonad $ docks def
-		{ layoutHook = avoidStruts  $  layoutHook def
+		{ layoutHook = avoidStruts (Tall 1 (3/100) (1/2) ||| Full)  -- $  layoutHook def
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = const "" -- xmobarColor "green" "" . shorten 30
